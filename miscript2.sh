@@ -18,7 +18,10 @@ echo ${porcentajeRam}
 #porcentaje libre HD
 
 porcentajeHD=$(df | grep root | awk '{print $5}' | cut -c1-2)
+porcentajeHD=$((100 - ${porcentajeHD}))
+
 echo ${porcentajeHD}
+
 
 echo ${NUEMPROCESOS}
 curl --silent --request POST --header "X-THINGSPEAKAPIKEY:DEDTHRLIXWNGPFR3" --data "field1=${NUEMPROCESOS}&field2=${porcentajeRam}&field3=${porcentajeHD}" http://api.thingspeak.com/update
